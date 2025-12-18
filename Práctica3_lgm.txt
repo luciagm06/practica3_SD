@@ -1,0 +1,18 @@
+URL DEL REPOSITORIO:
+https://github.com/luciagm06/practica3_SD.git
+
+EXPLICACIÓN DE LOS CONTENIDOS:
+1. Acquire:
+   Servicio que obtiene datos de Kunna API y genera features para predicción.
+2. Orchestrator:
+   Servicio que coordina el flujo completo entre Acquire y Predict.
+3. Predict:
+   Servicio que ejecuta el modelo TensorFlow.js y genera la predicción.
+4. docker-compose.yml:
+   Archivo que orquesta los tres microservicios y MongoDB en contenedores Docker.
+5. .env.docker:
+   Archivo con variables de entorno compartidas por todos los servicios.
+6. .dockerignore:
+   Archivos a excluir al construir las imágenes Docker de cada servicio.
+7. README.md:
+   Documentación del proyecto con instrucciones de instalación y uso.

@@ -1,0 +1,58 @@
+version: "3.9"
+
+services:
+  mongo:
+    image: mongo:7.0
+    container_name: mongo
+    restart: unless-stopped
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  acquire:
+    build:
+      context: .
+      dockerfile: acquire/Dockerfile
+    image: acquire:1.0
+    container_name: acquire
+    restart: unless-stopped
+    env_file:
+      - .env.docker
+    depends_on:
+      - mongo
+    ports:
+      - "3001:3001"
+
+  predict:
+    build:
+      context: .
+      dockerfile: predict/Dockerfile
+    image: predict:1.0
+    container_name: predict
+    restart: unless-stopped
+    env_file:
+      - .env.docker
+    depends_on:
+      - mongo
+    ports:
+      - "3002:3002"
+
+  orchestrator:
+    build:
+      context: .
+      dockerfile: orchestrator/Dockerfile
+    image: orchestrator:1.0
+    container_name: orchestrator
+    restart: unless-stopped
+    env_file:
+      - .env.docker
+    depends_on:
+      - mongo
+      - acquire
+      - predict
+    ports:
+      - "8080:8080"
+
+volumes:
+  mongo-data:

@@ -14,5 +14,4 @@ EXPLICACIÓN DE LOS CONTENIDOS:
    Archivo con variables de entorno compartidas por todos los servicios.
 6. .dockerignore:
    Archivos a excluir al construir las imágenes Docker de cada servicio.
-7. README.md:
-   Documentación del proyecto con instrucciones de instalación y uso.
+

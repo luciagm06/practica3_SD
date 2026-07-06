@@ -15,6 +15,7 @@ function health(req, res) {
 async function run(req, res) {
   const startTime = Date.now();
   const correlationId = generateCorrelationId();
+  const authHeader = req.headers.authorization;
 
   try {
     console.log('[ORCHESTRATOR] Nueva peticion POST /run');
@@ -23,7 +24,12 @@ async function run(req, res) {
     const acquireResponse = await axios.post(
       `${ACQUIRE_URL}/data`,
       {},
-      { timeout: 30000 }
+      {
+        timeout: 30000,
+        headers: {
+          Authorization: authHeader
+        }
+      }
     );
 
     const acquireData = acquireResponse.data;
@@ -50,7 +56,12 @@ async function run(req, res) {
           time_end: timeEnd.toISOString()
         }
       },
-      { timeout: 30000 }
+      {
+        timeout: 30000,
+        headers: {
+          Authorization: authHeader
+        }
+      }
     );
 
     const predictData = predictResponse.data;
